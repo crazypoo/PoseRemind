@@ -27,6 +27,8 @@
 		55ABE0A6291952280084ED28 /* movenet_thunder_int8.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 55ABE09E291921C90084ED28 /* movenet_thunder_int8.tflite */; };
 		55ABE0A72919522B0084ED28 /* pose_classifier.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 55ABE09F291921C90084ED28 /* pose_classifier.tflite */; };
 		55ABE0A82919522D0084ED28 /* movenet_thunder_fp16.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 55ABE09D291920FD0084ED28 /* movenet_thunder_fp16.tflite */; };
+		55ABE0AA291A2E210084ED28 /* pose_labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55ABE0A9291A2E210084ED28 /* pose_labels.txt */; };
+		55ABE0AC291A34010084ED28 /* PRPoseClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ABE0AB291A34010084ED28 /* PRPoseClassifier.swift */; };
 		571F72C465F025A475D506CF /* Pods_PoseRemind.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BA08C1B187389422BF69C2 /* Pods_PoseRemind.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,8 @@
 		55ABE09F291921C90084ED28 /* pose_classifier.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pose_classifier.tflite; sourceTree = "<group>"; };
 		55ABE0A0291921C90084ED28 /* classifier.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = classifier.tflite; sourceTree = "<group>"; };
 		55ABE0A1291921C90084ED28 /* movenet_multipose_fp16.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = movenet_multipose_fp16.tflite; sourceTree = "<group>"; };
+		55ABE0A9291A2E210084ED28 /* pose_labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pose_labels.txt; sourceTree = "<group>"; };
+		55ABE0AB291A34010084ED28 /* PRPoseClassifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRPoseClassifier.swift; sourceTree = "<group>"; };
 		62BA08C1B187389422BF69C2 /* Pods_PoseRemind.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseRemind.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1690717376A9212FA5E3BD0 /* Pods-PoseRemind.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseRemind.debug.xcconfig"; path = "Target Support Files/Pods-PoseRemind/Pods-PoseRemind.debug.xcconfig"; sourceTree = "<group>"; };
 		C76B51E98EF49FDAF8056B0F /* Pods-PoseRemind.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseRemind.release.xcconfig"; path = "Target Support Files/Pods-PoseRemind/Pods-PoseRemind.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		55ABE085291902A90084ED28 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				55ABE0A9291A2E210084ED28 /* pose_labels.txt */,
 				55ABE0A0291921C90084ED28 /* classifier.tflite */,
 				55ABE0A1291921C90084ED28 /* movenet_multipose_fp16.tflite */,
 				55ABE09E291921C90084ED28 /* movenet_thunder_int8.tflite */,
@@ -126,6 +131,7 @@
 				55ABE088291902A90084ED28 /* PoseNet.swift */,
 				55ABE089291902A90084ED28 /* PoseData.swift */,
 				55ABE08A291902A90084ED28 /* PoseConfig.swift */,
+				55ABE0AB291A34010084ED28 /* PRPoseClassifier.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -242,6 +248,7 @@
 				55ABE0A82919522D0084ED28 /* movenet_thunder_fp16.tflite in Resources */,
 				55ABE0762918BA880084ED28 /* Main.storyboard in Resources */,
 				55ABE0A5291952260084ED28 /* movenet_multipose_fp16.tflite in Resources */,
+				55ABE0AA291A2E210084ED28 /* pose_labels.txt in Resources */,
 				55ABE0A72919522B0084ED28 /* pose_classifier.tflite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55ABE093291902A90084ED28 /* PoseConfig.swift in Sources */,
+				55ABE0AC291A34010084ED28 /* PRPoseClassifier.swift in Sources */,
 				55ABE091291902A90084ED28 /* PoseNet.swift in Sources */,
 				55ABE092291902A90084ED28 /* PoseData.swift in Sources */,
 				55ABE090291902A90084ED28 /* MoveNet.swift in Sources */,

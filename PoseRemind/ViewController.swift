@@ -210,55 +210,55 @@ class ViewController: UIViewController {
 
 // MARK: - CameraFeedManagerDelegate Methods
 extension ViewController: CameraFeedManagerDelegate {
-  func cameraFeedManager(
-    _ cameraFeedManager: CameraFeedManager, didOutput pixelBuffer: CVPixelBuffer
-  ) {
-    self.runModel(pixelBuffer)
-  }
+    func cameraFeedManager(
+      _ cameraFeedManager: CameraFeedManager, didOutput pixelBuffer: CVPixelBuffer
+    ) {
+      self.runModel(pixelBuffer)
+    }
 
   /// Run pose estimation on the input frame from the camera.
-  private func runModel(_ pixelBuffer: CVPixelBuffer) {
-    // Guard to make sure that there's only 1 frame process at each moment.
-    guard !isRunning else { return }
+    private func runModel(_ pixelBuffer: CVPixelBuffer)
+    {
+        // Guard to make sure that there's only 1 frame process at each moment.
+        guard !isRunning else { return }
 
-    // Guard to make sure that the pose estimator is already initialized.
-    guard let estimator = poseEstimator else { return }
+        // Guard to make sure that the pose estimator is already initialized.
+        guard let estimator = poseEstimator else { return }
 
-    // Run inference on a serial queue to avoid race condition.
-    queue.async {
-      self.isRunning = true
-      defer { self.isRunning = false }
+        // Run inference on a serial queue to avoid race condition.
+        queue.async {
+          self.isRunning = true
+          defer { self.isRunning = false }
 
-      // Run pose estimation
-      do {
-        let (result, times) = try estimator.estimateSinglePose(
-            on: pixelBuffer)
+          // Run pose estimation
+          do {
+            let (result, times) = try estimator.estimateSinglePose(
+                on: pixelBuffer)
 
-        // Return to main thread to show detection results on the app UI.
-        DispatchQueue.main.async {
-          self.totalTimeLabel.text = String(format: "%.2fms",
-                                            times.total * 1000)
-          self.scoreLabel.text = String(format: "%.3f", result.score)
-            print(">>>>>>>>>>>>>>>>>>>>>>>\(result.keyPoints)")
+            // Return to main thread to show detection results on the app UI.
+            DispatchQueue.main.async {
+                self.totalTimeLabel.text = String(format: "%.2fms",
+                                                  times.total * 1000)
+                self.scoreLabel.text = String(format: "%.3f", result.score)
 
-          // Allowed to set image and overlay
-          let image = UIImage(ciImage: CIImage(cvPixelBuffer: pixelBuffer))
+                // Allowed to set image and overlay
+                let image = UIImage(ciImage: CIImage(cvPixelBuffer: pixelBuffer))
 
-          // If score is too low, clear result remaining in the overlayView.
-          if result.score < self.minimumScore {
-            self.overlayView.image = image
+                // If score is too low, clear result remaining in the overlayView.
+                if result.score < self.minimumScore {
+                  self.overlayView.image = image
+                  return
+                }
+
+                // Visualize the pose estimation result.
+                self.overlayView.draw(at: image, person: result)
+            }
+          } catch {
+            os_log("Error running pose estimation.", type: .error)
             return
           }
-
-          // Visualize the pose estimation result.
-          self.overlayView.draw(at: image, person: result)
         }
-      } catch {
-        os_log("Error running pose estimation.", type: .error)
-        return
-      }
     }
-  }
 }
 
 enum Constants {

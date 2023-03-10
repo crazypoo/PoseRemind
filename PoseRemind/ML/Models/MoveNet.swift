@@ -42,7 +42,7 @@ final class MoveNet: PoseEstimator {
 
   // Model files
   private let movenetLightningFile = FileInfo(name: "movenet_thunder_int8", ext: "tflite")
-  private let movenetThunderFile = FileInfo(name: "movenet_thunder_fp16", ext: "tflite")
+  private let movenetThunderFile = FileInfo(name: "movenet_thunder_int8", ext: "tflite")
 
   // MARK: - Initialization
 
